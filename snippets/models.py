@@ -1,5 +1,5 @@
 from django.db import models
-from pygments.lexers import get_all_lexers
+from pygments.lexers import get_lexer_by_name,get_all_lexers
 from pygments.styles import get_all_styles
 from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
@@ -29,7 +29,7 @@ class Snippet(models.Model):
         :param kwargs:
         :return:
         """
-        lexer = get_all_lexers(self.language)
+        lexer = get_lexer_by_name(self.language)
         linenos= 'table' if self.linenos else False
         options = {'title':self.title} if self.title else {}
         formatter = HtmlFormatter(style = self.style, linenos=linenos, full=True, **options)
